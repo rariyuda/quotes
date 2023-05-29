@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'quote.dart';
+import 'quote_card.dart';
 
 void main(){
   runApp(const MaterialApp(
@@ -9,60 +10,40 @@ void main(){
 
 class QuoteList extends StatefulWidget {
   const QuoteList({super.key});
-
+  
   @override
   State<QuoteList> createState() => _QuoteListState();
 }
 
 class _QuoteListState extends State<QuoteList> {
-  List<Quote> quotes = [
-  Quote(text:"Success is not final, failure is not fatal, it's the courage to continue that counts.",author:'Jon'),
-  Quote(text:"The only way to do great work is to love what you do.",author:'Cen'),
-  Quote(text:"Believe you can and you're halfway there.",author:'Na'),
+  List <Quote> quotes=[
+    Quote(text:"Success is not final, failure is not fatal, it's the courage to continue that counts.",author:'Jon'),
+    Quote(text:"The only way to do great work is to love what you do.",author:'Cen'),
+    Quote(text:"Believe you can and you're halfway there.",author:'Na'),
   ];
 
-  Widget quoteTemplate(quote){
-    return Card(
-      margin: EdgeInsets.fromLTRB(16, 16, 16, 0),
-      child: Padding(
-        padding: const EdgeInsets.all(12.0),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          children : <Widget>[
-            Text(
-              quote.text,
-              style: TextStyle(
-                fontSize: 18.0,
-                color: Colors.grey[600],
-              ),
-            ),
-            SizedBox(height: 6.0),
-            Text(
-              quote.author,
-              style: TextStyle(
-                fontSize: 14.0,
-                color: Colors.grey[800],
-              ),
-            ),
-        ],),
-      )
-    );
-  }
-  List<String> authors = [
-  'Jon',
-  'Cen',
-  'Na'
-  ];
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text('Awesome Quote'),),
+      backgroundColor: Colors.grey[200],
+      appBar: AppBar(
+        title: const Text('Awesome Quote'),
+        backgroundColor: Colors.orange[600],
+        centerTitle: true,
+      ),
       body: Column(
-        children: quotes.map((quote) => quoteTemplate(quote)).toList(),
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        children: quotes.map((quote) => QuoteCard(
+          quote: quote,
+          delete: (){
+            setState(() {
+              quotes.remove(quote);
+            });
+          }
+        )).toList(), 
       ),
     );
   }
 }
 
-//quotes.map((quote) => Text('${quote.text} - ${quote.author}')).toList(), 
