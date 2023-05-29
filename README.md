@@ -1,6 +1,6 @@
 # quotes
 
-A new Flutter project.
+Usage practice of List of Data with Custom Class
 
 ## Getting Started
 
